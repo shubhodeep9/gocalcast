@@ -1,8 +1,17 @@
 package gocalcast
 
-import "fmt"
+import (
+	"flag"
+	"log"
+	"net/http"
+)
 
-func main() {
-	//TODO
-	fmt.Println("Gocalcast")
+var port = flag.String("port", ":1801", "http server address")
+
+func New() {
+	flag.Parse()
+	err := http.ListenAndServe(*port, nil)
+	if err != nil {
+		log.Fatal("ListenAndServe: ", err)
+	}
 }
